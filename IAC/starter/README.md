@@ -1,5 +1,5 @@
 # CD12352 - Infrastructure as Code Project Solution
-# [YOUR NAME HERE]
+# [Saleh Alobaylan]
 
 ## Spin up instructions
 TODO
@@ -7,5 +7,3 @@ TODO
 ## Tear down instructions
 TODO
 
-## Other considerations
-TODO (optional)
