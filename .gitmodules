@@ -1,0 +1,3 @@
+[submodule "app/CRM-System"]
+	path = app/CRM-System
+	url = https://github.com/SalehAlobaylan/CRM-System.git
