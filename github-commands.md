@@ -4,10 +4,21 @@
 
 git add .
 
-git 
+git commit -m "just change some docs"
 
-git
+git push
 
 
+```
+
+```
+
+git pull
+
+```
+
+```
+
+git clone https://github.com/[Repo owner]/[Repo name].git
 
 ```
