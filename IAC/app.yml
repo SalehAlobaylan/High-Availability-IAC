@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Saleh Alobaylan - Infrastructure as Code Project - Udagram
+Description: Saleh Alobaylan - Infrastructure as Code Project - App Stack
 
 Parameters:
   EnvironmentName:
     Type: String
-    Default: udagram
+    Default: app
     Description: Environment name used for tagging and imports.
     AllowedPattern: "^[a-z0-9-]+$"
     ConstraintDescription: Use only lowercase letters, numbers, and hyphens.
@@ -35,7 +35,7 @@ Resources:
   StaticBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${EnvironmentName}-${AWS::AccountId}-${AWS::Region}-udagram-static"
+      BucketName: !Sub "${EnvironmentName}-${AWS::AccountId}-${AWS::Region}-app-static"
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false
@@ -70,7 +70,7 @@ Resources:
             Action:
               - "sts:AssumeRole"
       Policies:
-        - PolicyName: UdagramStaticBucketRW
+        - PolicyName: AppStaticBucketRW
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -210,7 +210,7 @@ Resources:
             systemctl enable nginx
             systemctl start nginx
 
-            cat > /usr/local/bin/udagram-sync.sh <<'SCRIPT'
+            cat > /usr/local/bin/app-sync.sh <<'SCRIPT'
             #!/bin/bash
             set -euo pipefail
             AWS_BIN="$(command -v aws || true)"
@@ -234,12 +234,12 @@ Resources:
               cp /var/www/html/index.html /var/www/html/index.nginx-debian.html
             fi
             SCRIPT
-            chmod +x /usr/local/bin/udagram-sync.sh
+            chmod +x /usr/local/bin/app-sync.sh
 
-            /usr/local/bin/udagram-sync.sh >> /var/log/udagram-sync.log 2>&1
+            /usr/local/bin/app-sync.sh >> /var/log/app-sync.log 2>&1
 
-            cat > /etc/cron.d/udagram-sync <<'CRON'
-            * * * * * root /usr/local/bin/udagram-sync.sh >> /var/log/udagram-sync.log 2>&1
+            cat > /etc/cron.d/app-sync <<'CRON'
+            * * * * * root /usr/local/bin/app-sync.sh >> /var/log/app-sync.log 2>&1
             CRON
 
   WebAppAutoScalingGroup:

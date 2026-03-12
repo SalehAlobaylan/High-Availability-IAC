@@ -6,8 +6,8 @@ if ! command -v aws >/dev/null 2>&1; then
   exit 1
 fi
 
-STACK_NETWORK="udagram-network"
-STACK_APP="udagram-app"
+STACK_NETWORK="app-network"
+STACK_APP="app-stack"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 IAC_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
@@ -16,8 +16,8 @@ APP_DIR="${ROOT_DIR}/app"
 
 NETWORK_TEMPLATE="${IAC_DIR}/network.yml"
 NETWORK_PARAMS="${IAC_DIR}/network-parameters.json"
-APP_TEMPLATE="${IAC_DIR}/udagram.yml"
-APP_PARAMS="${IAC_DIR}/udagram-parameters.json"
+APP_TEMPLATE="${IAC_DIR}/app.yml"
+APP_PARAMS="${IAC_DIR}/app-parameters.json"
 
 stack_exists() {
   aws cloudformation describe-stacks --stack-name "$1" >/dev/null 2>&1

@@ -6,8 +6,8 @@ if ! command -v aws >/dev/null 2>&1; then
   exit 1
 fi
 
-STACK_NETWORK="udagram-network"
-STACK_APP="udagram-app"
+STACK_NETWORK="app-network"
+STACK_APP="app-stack"
 
 stack_exists() {
   aws cloudformation describe-stacks --stack-name "$1" >/dev/null 2>&1
